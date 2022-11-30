@@ -21,7 +21,8 @@ class PasterConfig {
         let savefolder = vscode.workspace.getConfiguration('pasteImage').path;
         savefolder = (new PredefinedVars(uri)).replace(savefolder).trim();
         if (path.isAbsolute(savefolder)) {
-            return vscode.Uri.file(savefolder);
+            const root = uri.path.split('/').map(v => '..').join('/');
+			return vscode.Uri.joinPath(uri, root, savefolder);
         }
         return vscode.Uri.joinPath(uri, "../", savefolder);
     }
