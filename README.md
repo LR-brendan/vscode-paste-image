@@ -1,3 +1,7 @@
+# LR-brendan edit
+
+Modified so absolute paths get converted to a remote uri. (previously the ext tried to save absolute paths to local file system - which may not exist)
+
 # Paste Image
 
 Paste image directly from clipboard to markdown/asciidoc(or other file)!
