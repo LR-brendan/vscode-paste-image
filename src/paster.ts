@@ -40,7 +40,12 @@ class Paster {
             if(PasterConfig.useFilePathConfirm()){
                 const newPath = await this.confirmImagePath(imageUri);
                 if(!newPath){return;}
-                imageUri = newPath;
+                if (path.isAbsolute(newPath.path)) {
+                    const root = imageUri.path.split('/').map(v => '..').join('/');
+                    imageUri = vscode.Uri.joinPath(imageUri, root, newPath.path);
+                } else {
+                    imageUri = newPath
+                }
             }
             const imageData = await script.getBase64Image();
             await this.saveImage(imageUri, imageData);
